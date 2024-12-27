@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen.tsx';
 import CartScreen from './CartScreen.tsx';
 import MeScreen from './MeScreen.tsx';
+import { useNavigation } from '@react-navigation/native';
 
 
 const BottomTab = createBottomTabNavigator<any>();
@@ -35,8 +36,10 @@ const BottomTabNavigator: React.FC = () => {
 
 const RootStack = createNativeStackNavigator<any>();
 const RootStackNavigator: React.FC = () => {
+  const navigation = useNavigation();
   const handleGoBack = () => {
     console.log('click: go back')
+    navigation.goBack()
   }
   const headerLeft = () => (
     <Text onPress={handleGoBack}>go back</Text>
@@ -55,7 +58,7 @@ const RootStackNavigator: React.FC = () => {
         name="Me"
         component={MeScreen}
         options={{
-          headerLeft: headerLeft
+          headerLeft: headerLeft,
         }}
       />
     </RootStack.Navigator>
